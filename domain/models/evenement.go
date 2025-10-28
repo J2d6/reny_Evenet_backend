@@ -4,7 +4,6 @@ import (
     "time"
 )
 
-
 type CreationEvenementRequest struct {
     // Données événement
     Type_evenement string    `json:"type_id"`
@@ -13,9 +12,19 @@ type CreationEvenementRequest struct {
     DateDebut   time.Time    `json:"date_debut"`
     DateFin     time.Time    `json:"date_fin"`
     
-    // Données lieu (plus de LieuID)
+    // Données lieu
     Lieu        LieuInput    `json:"lieu"`
     
     // Tarifs
     Tarifs      []TarifInput `json:"tarifs"`
+    
+    // Fichiers (nouveau!)
+    Fichiers    []FichierInput `json:"fichiers,omitempty"`
+}
+
+type FichierInput struct {
+    NomFichier  string `json:"nom_fichier"`
+    TypeMime    string `json:"type_mime"`
+    TypeFichier string `json:"type_fichier"` // 'photo', 'affiche', 'document'
+    DonneesBase64 string `json:"donnees_base64"` // Fichier encodé en base64
 }

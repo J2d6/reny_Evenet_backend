@@ -1,13 +1,13 @@
 package service
 
 import (
-	"context"
-	"fmt"
-	"time"
-	"github.com/J2d6/reny_event/domain/interfaces"
-	"github.com/J2d6/reny_event/domain/models"
-	"github.com/J2d6/reny_event/domain/errors"
-	"github.com/google/uuid"
+    "context"
+    "fmt"
+    "time"
+    
+    "github.com/J2d6/reny_event/domain/models"
+    "github.com/J2d6/reny_event/domain/interfaces"
+    "github.com/google/uuid"
 )
 
 type EvenementService struct {
@@ -18,91 +18,93 @@ func NewEvenementService(repo interfaces.EvenementRepository) *EvenementService 
     return &EvenementService{repo: repo}
 }
 
-
-func (service *EvenementService) CreerEvenement(
+// CreerEvenement crée un événement complet avec lieu, tarifs et fichiers
+func (s *EvenementService) CreerEvenement(
     ctx context.Context,
     req models.CreationEvenementRequest,
 ) (uuid.UUID, error) {
     
-    if err := service.validerDonneesCreation(req); err != nil {
+    // Validation des données
+    if err := s.validerDonneesCreation(req); err != nil {
         return uuid.Nil, err
     }
     
-    evenementID, err := service.repo.CreateNewEvenement(context.Background(),req)
+    // Appel du repository pour créer l'événement
+    evenementID, err := s.repo.CreateNewEvenement(ctx, req)
     if err != nil {
-        return uuid.Nil, err
+        return uuid.Nil, fmt.Errorf("échec création événement: %w", err)
     }
     
     return evenementID, nil
 }
 
-
-func (service *EvenementService) validerDonneesCreation(req models.CreationEvenementRequest) error {
+// validerDonneesCreation valide les règles métier pour la création
+func (s *EvenementService) validerDonneesCreation(req models.CreationEvenementRequest) error {
     // Validation du titre
     if req.Titre == "" {
-        return &errors.ErreurValidation{Champ: "titre", Message: "Le titre est obligatoire"}
+        return &ErreurValidation{Champ: "titre", Message: "Le titre est obligatoire"}
     }
     if len(req.Titre) > 150 {
-        return &errors.ErreurValidation{Champ: "titre", Message: "Le titre ne peut pas dépasser 150 caractères"}
+        return &ErreurValidation{Champ: "titre", Message: "Le titre ne peut pas dépasser 150 caractères"}
     }
     
     // Validation des dates
     if req.DateDebut.IsZero() {
-        return &errors.ErreurValidation{Champ: "date_debut", Message: "La date de début est obligatoire"}
+        return &ErreurValidation{Champ: "date_debut", Message: "La date de début est obligatoire"}
     }
     if req.DateFin.IsZero() {
-        return &errors.ErreurValidation{Champ: "date_fin", Message: "La date de fin est obligatoire"}
+        return &ErreurValidation{Champ: "date_fin", Message: "La date de fin est obligatoire"}
     }
     if req.DateDebut.Before(time.Now()) {
-        return &errors.ErreurValidation{Champ: "date_debut", Message: "La date de début doit être dans le futur"}
+        return &ErreurValidation{Champ: "date_debut", Message: "La date de début doit être dans le futur"}
     }
     if req.DateFin.Before(req.DateDebut) {
-        return &errors.ErreurValidation{Champ: "date_fin", Message: "La date de fin doit être après la date de début"}
+        return &ErreurValidation{Champ: "date_fin", Message: "La date de fin doit être après la date de début"}
     }
     
     // Validation du type
     if req.Type_evenement == "" {
-        return &errors.ErreurValidation{Champ: "type_id", Message: "Le type d'événement est obligatoire"}
+        return &ErreurValidation{Champ: "type_evenement", Message: "Le type d'événement est obligatoire"}
     }
     
     // Validation du lieu
     if req.Lieu.Nom == "" {
-        return &errors.ErreurValidation{Champ: "lieu.nom", Message: "Le nom du lieu est obligatoire"}
+        return &ErreurValidation{Champ: "lieu.nom", Message: "Le nom du lieu est obligatoire"}
     }
     if len(req.Lieu.Nom) > 150 {
-        return &errors.ErreurValidation{Champ: "lieu.nom", Message: "Le nom du lieu ne peut pas dépasser 150 caractères"}
+        return &ErreurValidation{Champ: "lieu.nom", Message: "Le nom du lieu ne peut pas dépasser 150 caractères"}
     }
     if req.Lieu.Adresse == "" {
-        return &errors.ErreurValidation{Champ: "lieu.adresse", Message: "L'adresse du lieu est obligatoire"}
+        return &ErreurValidation{Champ: "lieu.adresse", Message: "L'adresse du lieu est obligatoire"}
     }
     if req.Lieu.Ville == "" {
-        return &errors.ErreurValidation{Champ: "lieu.ville", Message: "La ville du lieu est obligatoire"}
+        return &ErreurValidation{Champ: "lieu.ville", Message: "La ville du lieu est obligatoire"}
     }
     if req.Lieu.Capacite <= 0 {
-        return &errors.ErreurValidation{Champ: "lieu.capacite", Message: "La capacité du lieu doit être positive"}
+        return &ErreurValidation{Champ: "lieu.capacite", Message: "La capacité du lieu doit être positive"}
     }
     
     // Validation des tarifs
     if len(req.Tarifs) == 0 {
-        return &errors.ErreurValidation{Champ: "tarifs", Message: "Au moins un tarif doit être spécifié"}
+        return &ErreurValidation{Champ: "tarifs", Message: "Au moins un tarif doit être spécifié"}
     }
     
     totalPlaces := 0
     for i, tarif := range req.Tarifs {
         if tarif.TypePlaceID == uuid.Nil {
-            return &errors.ErreurValidation{
+            return &ErreurValidation{
                 Champ:   "tarifs",
                 Message: fmt.Sprintf("Le type de place est obligatoire pour le tarif %d", i+1),
             }
         }
         if tarif.Prix < 0 {
-            return &errors.ErreurValidation{
+            return &ErreurValidation{
                 Champ:   "tarifs",
                 Message: fmt.Sprintf("Le prix ne peut pas être négatif pour le tarif %d", i+1),
             }
         }
         if tarif.NombrePlaces <= 0 {
-            return &errors.ErreurValidation{
+            return &ErreurValidation{
                 Champ:   "tarifs",
                 Message: fmt.Sprintf("Le nombre de places doit être positif pour le tarif %d", i+1),
             }
@@ -112,13 +114,49 @@ func (service *EvenementService) validerDonneesCreation(req models.CreationEvene
     
     // Vérification que le total des places ne dépasse pas la capacité
     if totalPlaces > req.Lieu.Capacite {
-        return &errors.ErreurValidation{
+        return &ErreurValidation{
             Champ:   "tarifs",
             Message: fmt.Sprintf("Le total des places (%d) dépasse la capacité du lieu (%d)", totalPlaces, req.Lieu.Capacite),
+        }
+    }
+    
+    // Validation des fichiers (nouveau!)
+    for i, fichier := range req.Fichiers {
+        if fichier.NomFichier == "" {
+            return &ErreurValidation{
+                Champ:   "fichiers",
+                Message: fmt.Sprintf("Le nom de fichier est obligatoire pour le fichier %d", i+1),
+            }
+        }
+        if fichier.TypeFichier == "" {
+            return &ErreurValidation{
+                Champ:   "fichiers", 
+                Message: fmt.Sprintf("Le type de fichier est obligatoire pour le fichier %d", i+1),
+            }
+        }
+        if fichier.TypeFichier != "photo" && fichier.TypeFichier != "affiche" && fichier.TypeFichier != "document" {
+            return &ErreurValidation{
+                Champ:   "fichiers",
+                Message: fmt.Sprintf("Type de fichier invalide pour le fichier %d: doit être 'photo', 'affiche' ou 'document'", i+1),
+            }
+        }
+        if fichier.DonneesBase64 == "" {
+            return &ErreurValidation{
+                Champ:   "fichiers",
+                Message: fmt.Sprintf("Les données du fichier sont obligatoires pour le fichier %d", i+1),
+            }
         }
     }
     
     return nil
 }
 
+// ErreurValidation représente une erreur de validation métier
+type ErreurValidation struct {
+    Champ   string
+    Message string
+}
 
+func (e *ErreurValidation) Error() string {
+    return fmt.Sprintf("Erreur validation %s: %s", e.Champ, e.Message)
+}

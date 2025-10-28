@@ -2,10 +2,11 @@ package reposiory
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 
-	"github.com/J2d6/reny_event/domain/models"
 	Int "github.com/J2d6/reny_event/domain/interfaces"
+	"github.com/J2d6/reny_event/domain/models"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5"
 )
@@ -14,7 +15,6 @@ import (
 type EvenementRepository struct {
 	conn pgx.Conn
 }
-
 
 func (r *EvenementRepository) CreateNewEvenement(
     ctx context.Context, 
@@ -28,6 +28,31 @@ func (r *EvenementRepository) CreateNewEvenement(
         return uuid.Nil, err
     }
     
+    // Préparation des fichiers pour JSON
+    var fichiersJSON []byte
+    if len(req.Fichiers) > 0 {
+        fichiersPourJSON := make([]map[string]interface{}, len(req.Fichiers))
+        for i, fichier := range req.Fichiers {
+            // Décoder le base64 en bytes pour PostgreSQL
+            donneesBytes, err := base64.StdEncoding.DecodeString(fichier.DonneesBase64)
+            if err != nil {
+                return uuid.Nil, err
+            }
+            
+            fichiersPourJSON[i] = map[string]interface{}{
+                "nom_fichier":  fichier.NomFichier,
+                "type_mime":    fichier.TypeMime,
+                "type_fichier": fichier.TypeFichier,
+                "donnees_binaire": donneesBytes,
+            }
+        }
+        fichiersJSON, err = json.Marshal(fichiersPourJSON)
+        if err != nil {
+            return uuid.Nil, err
+        }
+    } else {
+        fichiersJSON = []byte("[]")
+    }
     
     err = r.conn.QueryRow(
         ctx,
@@ -47,6 +72,9 @@ func (r *EvenementRepository) CreateNewEvenement(
         
         // Tarifs
         tarifsJSON,
+        
+        // Fichiers
+        fichiersJSON,
     ).Scan(&nouvelID)
     
     if err != nil {

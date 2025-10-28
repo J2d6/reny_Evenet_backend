@@ -142,6 +142,7 @@ CREATE OR REPLACE FUNCTION verifier_capacite_lieu(
 DECLARE
     capacite_lieu INTEGER;
     places_existantes INTEGER;
+    places_actuelles_tarif INTEGER := 0;
 BEGIN
     -- Récupérer la capacité du lieu
     SELECT l.capacite INTO capacite_lieu
@@ -150,11 +151,12 @@ BEGIN
     WHERE e.id = p_evenement_id;
     
     -- Compter les places déjà créées pour cet événement
-    SELECT COALESCE(SUM(t.nombre_places), 0) INTO places_existantes
-    FROM tarif t
+    SELECT COUNT(p.id) INTO places_existantes
+    FROM place p
+    JOIN tarif t ON p.tarif_id = t.id
     WHERE t.evenement_id = p_evenement_id;
     
-    -- Vérifier si l'ajout est possible
+    -- ✅ AJOUT : Vérifier si assez de capacité
     RETURN (places_existantes + p_nouvelles_places) <= capacite_lieu;
 END;
 $$ LANGUAGE plpgsql;
@@ -224,27 +226,42 @@ CREATE OR REPLACE FUNCTION creer_places_automatiquement()
 RETURNS TRIGGER AS $$
 DECLARE
     compteur INTEGER := 1;
-    numero_place VARCHAR(50);
+    numero_place VARCHAR(100);
     nom_type_place VARCHAR(50);
+    uuid_evenement_sans_tirets TEXT;
+    places_deja_creees INTEGER;
 BEGIN
-    -- Récupérer le nom du type de place pour le préfixe
-    SELECT nom INTO nom_type_place FROM type_place WHERE id = NEW.type_place_id;
+    -- Récupérer l'UUID de l'événement et le nom du type de place
+    SELECT e.id, tp.nom 
+    INTO uuid_evenement_sans_tirets, nom_type_place
+    FROM evenement e, type_place tp
+    WHERE e.id = NEW.evenement_id AND tp.id = NEW.type_place_id;
     
-    -- Vérifier la capacité disponible
+    uuid_evenement_sans_tirets := REPLACE(uuid_evenement_sans_tirets::text, '-', '');
+    
+    -- ✅ COMPTER les places DÉJÀ CRÉÉES pour ce type de place dans cet événement
+    SELECT COUNT(p.id) INTO places_deja_creees
+    FROM place p
+    JOIN tarif t ON p.tarif_id = t.id
+    WHERE t.evenement_id = NEW.evenement_id 
+    AND t.type_place_id = NEW.type_place_id;
+    
+    -- Vérifier la capacité
     IF NOT verifier_capacite_lieu(NEW.evenement_id, NEW.nombre_places) THEN
-        RAISE EXCEPTION 'Capacité du lieu insuffisante pour créer % places supplémentaires', NEW.nombre_places;
+        RAISE EXCEPTION 'Capacité du lieu insuffisante. Places existantes: %, Nouvelles: %, Capacité: %', 
+            places_existantes, NEW.nombre_places, capacite_lieu;
     END IF;
     
-    -- Créer les places individuelles
+    -- Créer les places en CONTINUANT la numérotation
     WHILE compteur <= NEW.nombre_places LOOP
-        -- Générer le numéro de place
         numero_place := CONCAT(
             UPPER(SUBSTRING(nom_type_place FROM 1 FOR 3)), 
-            '-', 
-            LPAD(compteur::TEXT, 3, '0')
+            '-',
+            uuid_evenement_sans_tirets,
+            '-',
+            LPAD((places_deja_creees + compteur)::TEXT, 4, '0')  -- ✅ CONTINUE la numérotation
         );
         
-        -- Insérer la place
         INSERT INTO place (numero, etat_code, tarif_id)
         VALUES (numero_place, 'disponible', NEW.id);
         
@@ -254,11 +271,6 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_creer_places
-    AFTER INSERT ON tarif
-    FOR EACH ROW
-    EXECUTE FUNCTION creer_places_automatiquement();
 
 -- ================================================
 -- TRIGGER 3 : Audit des changements d'état des places
@@ -280,9 +292,8 @@ CREATE TRIGGER trigger_audit_place
     EXECUTE FUNCTION auditer_changement_etat();
 
 
-
 -- ================================================
--- FONCTION PRINCIPALE : Création complète d'événement
+-- FONCTION PRINCIPALE : Création complète avec fichiers
 -- ================================================
 CREATE OR REPLACE FUNCTION creer_evenement_complet(
     p_titre VARCHAR(150),
@@ -290,49 +301,43 @@ CREATE OR REPLACE FUNCTION creer_evenement_complet(
     p_date_debut TIMESTAMP,
     p_date_fin TIMESTAMP,
     p_type_id UUID,
-    p_lieu_id UUID,
-    p_tarifs JSONB
+    p_lieu_nom VARCHAR(150),
+    p_lieu_adresse TEXT,
+    p_lieu_ville VARCHAR(100),
+    p_lieu_capacite INT,
+    p_tarifs JSONB,
+    p_fichiers JSONB DEFAULT '[]'::JSONB
 ) 
 RETURNS UUID
 AS $$
 DECLARE
+    nouveau_lieu_id UUID;
     nouvel_evenement_id UUID;
     tarif_record JSONB;
+    fichier_record JSONB;
 BEGIN
     -- VALIDATION des paramètres obligatoires
     IF p_titre IS NULL OR p_titre = '' THEN
         RAISE EXCEPTION 'Le titre est obligatoire';
     END IF;
     
-    IF p_date_debut IS NULL OR p_date_fin IS NULL THEN
-        RAISE EXCEPTION 'Les dates sont obligatoires';
-    END IF;
-    
     IF p_tarifs IS NULL OR jsonb_array_length(p_tarifs) = 0 THEN
         RAISE EXCEPTION 'Au moins un tarif doit être spécifié';
     END IF;
     
-    -- ÉTAPE 1 : Création de l'événement
+    -- ÉTAPE 1 : Création du lieu
+    INSERT INTO lieu (nom, adresse, ville, capacite)
+    VALUES (p_lieu_nom, p_lieu_adresse, p_lieu_ville, p_lieu_capacite)
+    RETURNING id INTO nouveau_lieu_id;
+    
+    -- ÉTAPE 2 : Création de l'événement
     INSERT INTO evenement (titre, description, date_debut, date_fin, type_id, lieu_id)
-    VALUES (p_titre, p_description, p_date_debut, p_date_fin, p_type_id, p_lieu_id)
+    VALUES (p_titre, p_description, p_date_debut, p_date_fin, p_type_id, nouveau_lieu_id)
     RETURNING id INTO nouvel_evenement_id;
     
-    -- ÉTAPE 2 : Création des tarifs (déclenchera automatiquement les places)
+    -- ÉTAPE 3 : Création des tarifs
     FOR tarif_record IN SELECT * FROM jsonb_array_elements(p_tarifs) 
     LOOP
-        -- Validation des données du tarif
-        IF (tarif_record->>'type_place_id')::UUID IS NULL THEN
-            RAISE EXCEPTION 'type_place_id manquant dans un tarif';
-        END IF;
-        
-        IF (tarif_record->>'prix')::DECIMAL < 0 THEN
-            RAISE EXCEPTION 'Le prix ne peut pas être négatif';
-        END IF;
-        
-        IF (tarif_record->>'nombre_places')::INTEGER <= 0 THEN
-            RAISE EXCEPTION 'Le nombre de places doit être positif';
-        END IF;
-        
         INSERT INTO tarif (prix, nombre_places, evenement_id, type_place_id)
         VALUES (
             (tarif_record->>'prix')::DECIMAL,
@@ -342,14 +347,35 @@ BEGIN
         );
     END LOOP;
     
+    -- ÉTAPE 4 : Création des fichiers (si présents)
+    IF p_fichiers IS NOT NULL AND jsonb_array_length(p_fichiers) > 0 THEN
+        FOR fichier_record IN SELECT * FROM jsonb_array_elements(p_fichiers) 
+        LOOP
+            INSERT INTO fichier_evenement (
+                evenement_id, 
+                nom_fichier, 
+                type_mime, 
+                taille_bytes, 
+                type_fichier, 
+                donnees_binaire
+            )
+            VALUES (
+                nouvel_evenement_id,
+                fichier_record->>'nom_fichier',
+                fichier_record->>'type_mime',
+                octet_length((fichier_record->>'donnees_binaire')::bytea),
+                fichier_record->>'type_fichier',
+                decode(fichier_record->>'donnees_binaire', 'base64')
+            );
+        END LOOP;
+    END IF;
+    
     -- RETOUR de l'ID de l'événement créé
     RETURN nouvel_evenement_id;
     
 EXCEPTION
     WHEN others THEN
-        -- Log l'erreur et la propage
         RAISE EXCEPTION 'Erreur lors de la création de l''événement: %', SQLERRM;
 END;
 $$ LANGUAGE plpgsql;
-
 
