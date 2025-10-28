@@ -7,3 +7,6 @@ type TarifInput struct {
     Prix         float64   `json:"prix"`
     NombrePlaces int       `json:"nombre_places"`
 }
+
+
+

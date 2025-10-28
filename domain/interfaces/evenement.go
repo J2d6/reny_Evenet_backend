@@ -10,6 +10,7 @@ import (
 
 type EvenementRepository interface {
 	CreateNewEvenement(ctx context.Context, req models.CreationEvenementRequest,) (uuid.UUID, error)
+	GetEvenementByID(ctx context.Context, evenementID uuid.UUID) (*models.EvenementRow, error)
 }
 
 

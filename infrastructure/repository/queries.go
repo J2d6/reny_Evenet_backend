@@ -1,4 +1,4 @@
-package reposiory
+package repository
 
 
 var (
@@ -10,4 +10,20 @@ var (
             $11::jsonb            -- fichiers
         )
     `
+
+    FIND_EVENEMENT_BY_ID_QUERY string = `
+    SELECT 
+        evenement_id,
+        titre,
+        description_evenement,
+        date_debut,
+        date_fin,
+        type_evenement,
+        lieu,
+        tarifs,
+        fichiers,
+        statistiques
+    FROM vue_evenement_complet 
+    WHERE evenement_id = $1
+`
 )

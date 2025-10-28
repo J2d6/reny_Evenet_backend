@@ -1,4 +1,4 @@
-package reposiory
+package repository
 
 import (
 	"context"
@@ -11,7 +11,6 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-
 type EvenementRepository struct {
 	conn pgx.Conn
 }
@@ -23,35 +22,14 @@ func (r *EvenementRepository) CreateNewEvenement(
     
     var nouvelID uuid.UUID
     
-    tarifsJSON, err := json.Marshal(req.Tarifs)
+    tarifsJSON, err := r.prepareTarifsJSON(req.Tarifs)
     if err != nil {
         return uuid.Nil, err
     }
     
-    // Préparation des fichiers pour JSON
-    var fichiersJSON []byte
-    if len(req.Fichiers) > 0 {
-        fichiersPourJSON := make([]map[string]interface{}, len(req.Fichiers))
-        for i, fichier := range req.Fichiers {
-            // Décoder le base64 en bytes pour PostgreSQL
-            donneesBytes, err := base64.StdEncoding.DecodeString(fichier.DonneesBase64)
-            if err != nil {
-                return uuid.Nil, err
-            }
-            
-            fichiersPourJSON[i] = map[string]interface{}{
-                "nom_fichier":  fichier.NomFichier,
-                "type_mime":    fichier.TypeMime,
-                "type_fichier": fichier.TypeFichier,
-                "donnees_binaire": donneesBytes,
-            }
-        }
-        fichiersJSON, err = json.Marshal(fichiersPourJSON)
-        if err != nil {
-            return uuid.Nil, err
-        }
-    } else {
-        fichiersJSON = []byte("[]")
+    fichiersJSON, err := r.prepareFichiersJSON(req.Fichiers)
+    if err != nil {
+        return uuid.Nil, err
     }
     
     err = r.conn.QueryRow(
@@ -84,11 +62,90 @@ func (r *EvenementRepository) CreateNewEvenement(
     return nouvelID, nil
 }
 
-func  (r *EvenementRepository) CloseConn()  {
-	r.conn.Close(context.Background())
+
+func (r *EvenementRepository) prepareTarifsJSON(tarifs []models.TarifInput) ([]byte, error) {
+    return json.Marshal(tarifs)
 }
 
 
-func NewEvenementRepository(conn *pgx.Conn) *EvenementRepository  {
-	return &EvenementRepository{*conn}
+func (r *EvenementRepository) prepareFichiersJSON(fichiers []models.FichierInput) ([]byte, error) {
+    if len(fichiers) == 0 {
+        return []byte("[]"), nil
+    }
+    
+    fichiersPourJSON := make([]map[string]interface{}, len(fichiers))
+    for i, fichier := range fichiers {
+        // Décoder le base64 en bytes pour PostgreSQL
+        donneesBytes, err := base64.StdEncoding.DecodeString(fichier.DonneesBase64)
+        if err != nil {
+            return nil, err
+        }
+        
+        fichiersPourJSON[i] = map[string]interface{}{
+            "nom_fichier":    fichier.NomFichier,
+            "type_mime":      fichier.TypeMime,
+            "type_fichier":   fichier.TypeFichier,
+            "donnees_binaire": donneesBytes,
+        }
+    }
+    
+    return json.Marshal(fichiersPourJSON)
+}
+
+func (r *EvenementRepository) CloseConn() {
+    r.conn.Close(context.Background())
+}
+
+func NewEvenementRepository(conn *pgx.Conn) *EvenementRepository {
+    return &EvenementRepository{*conn}
+}
+
+
+
+// LECTURE 
+
+func (r *EvenementRepository) GetEvenementByID(
+    ctx context.Context, 
+    evenementID uuid.UUID,
+) (*models.EvenementRow, error) {
+    
+    var row models.EvenementRow
+    
+    query := `
+        SELECT 
+            evenement_id,
+            titre,
+            description_evenement,
+            date_debut,
+            date_fin,
+            type_evenement,
+            lieu,
+            tarifs,
+            fichiers,
+            statistiques
+        FROM vue_evenement_complet 
+        WHERE evenement_id = $1
+    `
+    
+    err := r.conn.QueryRow(ctx, query, evenementID).Scan(
+        &row.EvenementID,
+        &row.Titre,
+        &row.Description,
+        &row.DateDebut,     
+        &row.DateFin,       
+        &row.TypeEvenement,
+        &row.Lieu,
+        &row.Tarifs,
+        &row.Fichiers,
+        &row.Statistiques,
+    )
+    
+    if err != nil {
+        if err == pgx.ErrNoRows {
+            return nil, nil // Événement non trouvé
+        }
+        return nil, err
+    }
+    
+    return &row, nil
 }

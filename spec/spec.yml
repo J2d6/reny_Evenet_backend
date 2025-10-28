@@ -78,111 +78,252 @@ paths:
         '500':
           description: Erreur interne du serveur
 
+  /evenements/{id}:
+    get:
+      summary: Obtenir les détails d'un événement
+      description: >
+        Récupère les informations détaillées d'un événement spécifique 
+        incluant les tarifs, statistiques de places et fichiers associés.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: "e7b8c2f1-1234-4c1a-8b9f-12ef34567890"
+          description: "ID unique de l'événement"
+      responses:
+        '200':
+          description: Détails de l'événement récupérés avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvenementDetail'
+              examples:
+                concert_exemple:
+                  summary: Exemple de réponse pour un concert
+                  value:
+                    id: "e7b8c2f1-1234-4c1a-8b9f-12ef34567890"
+                    titre: "Concert Coldplay 2024"
+                    description: "Concert exceptionnel de Coldplay avec setlist spécial"
+                    date_debut: "2024-07-15T20:00:00Z"
+                    date_fin: "2024-07-15T23:30:00Z"
+                    type_evenement:
+                      id: "123e4567-e89b-12d3-a456-426614174000"
+                      nom: "Concert"
+                      description: "Événement musical avec artistes sur scène"
+                    lieu:
+                      id: "456e4567-e89b-12d3-a456-426614174000"
+                      nom: "Stade Barea Mahamasina"
+                      adresse: "Mahamasina, Antananarivo"
+                      ville: "Antananarivo"
+                      capacite: 5000
+                    tarifs:
+                      - id: "789e4567-e89b-12d3-a456-426614174000"
+                        prix: 250000
+                        nombre_places: 100
+                        type_place:
+                          id: "890e4567-e89b-12d3-a456-426614174000"
+                          nom: "VIP"
+                          description: "Place premium avec avantages exclusifs"
+                          avantages: "Accès lounge, parking dédié, restauration incluse"
+                        statistiques:
+                          total: 100
+                          disponibles: 75
+                          reservees: 10
+                          vendues: 15
+                          inactives: 0
+                      - id: "891e4567-e89b-12d3-a456-426614174000"
+                        prix: 75000
+                        nombre_places: 2000
+                        type_place:
+                          id: "892e4567-e89b-12d3-a456-426614174000"
+                          nom: "Standard"
+                          description: "Place classique standard"
+                          avantages: "Accès à l'événement, siège standard"
+                        statistiques:
+                          total: 2000
+                          disponibles: 1800
+                          reservees: 120
+                          vendues: 80
+                          inactives: 0
+                    fichiers:
+                      - id: "c3d4e5f6-7890-12cd-ef12-3456789012cd"
+                        nom_fichier: "affiche-coldplay.jpg"
+                        type_mime: "image/jpeg"
+                        type_fichier: "affiche"
+                        taille_bytes: 204800
+                        date_upload: "2024-01-15T14:30:00Z"
+                        url_contenu: "/v1/evenements/e7b8c2f1-1234-4c1a-8b9f-12ef34567890/fichiers/c3d4e5f6-7890-12cd-ef12-3456789012cd/contenu"
+                    statistiques:
+                      total_places: 2100
+                      places_disponibles: 1875
+                      places_reservees: 130
+                      places_vendues: 95
+                      taux_occupation: 10.7
+        '400':
+          description: ID d'événement invalide
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "ID d'événement invalide"
+        '404':
+          description: Événement non trouvé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Événement non trouvé"
+        '500':
+          description: Erreur interne du serveur
+
 components:
   schemas:
-    EvenementCreation:
+    # ... schemas existants (EvenementCreation, LieuCreation, TarifCreation, FichierCreation) ...
+
+    # NOUVEAUX SCHEMAS POUR LA LECTURE
+    EvenementDetail:
       type: object
-      required:
-        - titre
-        - date_debut
-        - date_fin
-        - type_evenement
-        - lieu
-        - tarifs
       properties:
+        id:
+          type: string
+          format: uuid
+          example: "e7b8c2f1-1234-4c1a-8b9f-12ef34567890"
         titre:
           type: string
-          maxLength: 150
           example: "Concert Coldplay 2024"
-          description: "Titre de l'événement"
         description:
           type: string
           example: "Concert exceptionnel de Coldplay avec setlist spécial"
-          description: "Description détaillée de l'événement"
         date_debut:
           type: string
           format: date-time
           example: "2024-07-15T20:00:00Z"
-          description: "Date et heure de début (format ISO 8601)"
         date_fin:
           type: string
           format: date-time
           example: "2024-07-15T23:30:00Z"
-          description: "Date et heure de fin (format ISO 8601)"
         type_evenement:
-          type: string
-          example: "Concert"
-          description: "Nom du type d'événement (doit exister au préalable)"
+          $ref: '#/components/schemas/TypeEvenement'
         lieu:
-          $ref: '#/components/schemas/LieuCreation'
+          $ref: '#/components/schemas/Lieu'
         tarifs:
           type: array
-          minItems: 1
           items:
-            $ref: '#/components/schemas/TarifCreation'
-          description: "Liste des tarifs proposés pour cet événement"
+            $ref: '#/components/schemas/TarifDetail'
         fichiers:
           type: array
           items:
-            $ref: '#/components/schemas/FichierCreation'
-          description: "Fichiers associés à l'événement (optionnel)"
+            $ref: '#/components/schemas/FichierInfo'
+        statistiques:
+          $ref: '#/components/schemas/EvenementStats'
 
-    LieuCreation:
+    TypeEvenement:
       type: object
-      required:
-        - nom
-        - adresse
-        - ville
-        - capacite
       properties:
+        id:
+          type: string
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426614174000"
         nom:
           type: string
-          maxLength: 150
+          example: "Concert"
+        description:
+          type: string
+          example: "Événement musical avec artistes sur scène"
+
+    Lieu:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "456e4567-e89b-12d3-a456-426614174000"
+        nom:
+          type: string
           example: "Stade Barea Mahamasina"
         adresse:
           type: string
           example: "Mahamasina, Antananarivo"
         ville:
           type: string
-          maxLength: 100
           example: "Antananarivo"
         capacite:
           type: integer
-          minimum: 1
           example: 5000
 
-    TarifCreation:
+    TarifDetail:
       type: object
-      required:
-        - type_place
-        - prix
-        - nombre_places
       properties:
-        type_place:
+        id:
           type: string
-          example: "VIP"
-          description: "Nom du type de place (doit exister au préalable)"
+          format: uuid
+          example: "789e4567-e89b-12d3-a456-426614174000"
         prix:
           type: number
           format: float
-          minimum: 0
           example: 250000
         nombre_places:
           type: integer
-          minimum: 1
           example: 100
+        type_place:
+          $ref: '#/components/schemas/TypePlace'
+        statistiques:
+          $ref: '#/components/schemas/TarifStats'
 
-    FichierCreation:
+    TypePlace:
       type: object
-      required:
-        - nom_fichier
-        - type_mime
-        - type_fichier
-        - donnees_base64
       properties:
+        id:
+          type: string
+          format: uuid
+          example: "890e4567-e89b-12d3-a456-426614174000"
+        nom:
+          type: string
+          example: "VIP"
+        description:
+          type: string
+          example: "Place premium avec avantages exclusifs"
+        avantages:
+          type: string
+          example: "Accès lounge, parking dédié, restauration incluse"
+
+    TarifStats:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 100
+        disponibles:
+          type: integer
+          example: 75
+        reservees:
+          type: integer
+          example: 10
+        vendues:
+          type: integer
+          example: 15
+        inactives:
+          type: integer
+          example: 0
+
+    FichierInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "c3d4e5f6-7890-12cd-ef12-3456789012cd"
         nom_fichier:
           type: string
-          maxLength: 255
           example: "affiche-coldplay.jpg"
         type_mime:
           type: string
@@ -191,7 +332,34 @@ components:
           type: string
           enum: [photo, affiche, document]
           example: "affiche"
-        donnees_base64:
+        taille_bytes:
+          type: integer
+          example: 204800
+        date_upload:
           type: string
-          description: "Fichier encodé en base64"
-          example: "/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+          format: date-time
+          example: "2024-01-15T14:30:00Z"
+        url_contenu:
+          type: string
+          format: uri
+          example: "/v1/evenements/e7b8c2f1-1234-4c1a-8b9f-12ef34567890/fichiers/c3d4e5f6-7890-12cd-ef12-3456789012cd/contenu"
+
+    EvenementStats:
+      type: object
+      properties:
+        total_places:
+          type: integer
+          example: 2100
+        places_disponibles:
+          type: integer
+          example: 1875
+        places_reservees:
+          type: integer
+          example: 130
+        places_vendues:
+          type: integer
+          example: 95
+        taux_occupation:
+          type: number
+          format: float
+          example: 10.7

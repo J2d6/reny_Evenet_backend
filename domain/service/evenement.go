@@ -1,13 +1,14 @@
 package service
 
 import (
-    "context"
-    "fmt"
-    "time"
-    
-    "github.com/J2d6/reny_event/domain/models"
-    "github.com/J2d6/reny_event/domain/interfaces"
-    "github.com/google/uuid"
+	"context"
+	"encoding/json"
+	"fmt"
+	"time"
+
+	"github.com/J2d6/reny_event/domain/interfaces"
+	"github.com/J2d6/reny_event/domain/models"
+	"github.com/google/uuid"
 )
 
 type EvenementService struct {
@@ -159,4 +160,65 @@ type ErreurValidation struct {
 
 func (e *ErreurValidation) Error() string {
     return fmt.Sprintf("Erreur validation %s: %s", e.Champ, e.Message)
+}
+
+
+
+
+// GetEvenementDetail récupère les détails complets d'un événement
+func (s *EvenementService) GetEvenementDetail(
+    ctx context.Context,
+    evenementID uuid.UUID,
+) (*models.EvenementDetail, error) {
+    
+    if evenementID == uuid.Nil {
+        return nil, &ErreurValidation{Champ: "id", Message: "ID d'événement invalide"}
+    }
+    
+    
+    row, err := s.repo.GetEvenementByID(ctx, evenementID)
+    if err != nil {
+        return nil, fmt.Errorf("erreur récupération événement: %w", err)
+    }
+    if row == nil {
+        return nil, nil // Événement non trouvé
+    }
+    
+    // Transformation des données brutes en modèle métier
+    return s.transformRowToEvenementDetail(row)
+}
+
+
+func (s *EvenementService) transformRowToEvenementDetail(row *models.EvenementRow) (*models.EvenementDetail, error) {
+    var detail models.EvenementDetail
+    
+    // Champs directs (plus besoin de conversion de dates!)
+    detail.ID = row.EvenementID
+    detail.Titre = row.Titre
+    detail.Description = row.Description
+    detail.DateDebut = row.DateDebut 
+    detail.DateFin = row.DateFin     
+    
+    // Désérialisation JSON vers les modèles métier
+    if err := json.Unmarshal(row.TypeEvenement, &detail.Type); err != nil {
+        return nil, fmt.Errorf("erreur désérialisation type_evenement: %w", err)
+    }
+    
+    if err := json.Unmarshal(row.Lieu, &detail.Lieu); err != nil {
+        return nil, fmt.Errorf("erreur désérialisation lieu: %w", err)
+    }
+    
+    if err := json.Unmarshal(row.Tarifs, &detail.Tarifs); err != nil {
+        return nil, fmt.Errorf("erreur désérialisation tarifs: %w", err)
+    }
+    
+    if err := json.Unmarshal(row.Fichiers, &detail.Fichiers); err != nil {
+        return nil, fmt.Errorf("erreur désérialisation fichiers: %w", err)
+    }
+    
+    if err := json.Unmarshal(row.Statistiques, &detail.Statistiques); err != nil {
+        return nil, fmt.Errorf("erreur désérialisation statistiques: %w", err)
+    }
+    
+    return &detail, nil
 }
