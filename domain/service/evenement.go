@@ -222,3 +222,34 @@ func (s *EvenementService) transformRowToEvenementDetail(row *models.EvenementRo
     
     return &detail, nil
 }
+
+
+
+
+// GetFichierContenu récupère le contenu binaire d'un fichier
+func (s *EvenementService) GetFichierContenu(
+    ctx context.Context,
+    evenementID uuid.UUID,
+    fichierID uuid.UUID,
+) (*models.FichierContenu, error) {
+    
+    // Validation des UUID
+    if evenementID == uuid.Nil {
+        return nil, &ErreurValidation{Champ: "evenement_id", Message: "ID d'événement invalide"}
+    }
+    if fichierID == uuid.Nil {
+        return nil, &ErreurValidation{Champ: "fichier_id", Message: "ID de fichier invalide"}
+    }
+    
+    // Appel du repository
+    contenu, err := s.repo.GetFichierContenu(ctx, evenementID, fichierID)
+    if err != nil {
+        return nil, fmt.Errorf("erreur récupération contenu fichier: %w", err)
+    }
+    
+    if contenu == nil {
+        return nil, nil // Fichier non trouvé
+    }
+    
+    return contenu, nil
+}

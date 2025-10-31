@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 
 	Int "github.com/J2d6/reny_event/domain/interfaces"
 	"github.com/J2d6/reny_event/domain/models"
@@ -148,4 +149,44 @@ func (r *EvenementRepository) GetEvenementByID(
     }
     
     return &row, nil
+}
+
+
+// GetFichierContenu récupère le contenu binaire d'un fichier
+func (r *EvenementRepository) GetFichierContenu(
+    ctx context.Context, 
+    evenementID uuid.UUID, 
+    fichierID uuid.UUID,
+) (*models.FichierContenu, error) {
+    
+    var contenu models.FichierContenu
+    
+    query := `
+        SELECT 
+            fe.nom_fichier,
+            fe.type_mime,
+            fe.taille_bytes,
+            fe.donnees_binaire,
+            e.id as evenement_id
+        FROM fichier_evenement fe
+        JOIN evenement e ON fe.evenement_id = e.id
+        WHERE fe.id = $1 AND fe.evenement_id = $2
+    `
+    
+    err := r.conn.QueryRow(ctx, query, fichierID, evenementID).Scan(
+        &contenu.NomFichier,
+        &contenu.TypeMime,
+        &contenu.TailleBytes,
+        &contenu.DonneesBinaire,
+        &contenu.EvenementID,
+    )
+    
+    if err != nil {
+        if err == pgx.ErrNoRows {
+            return nil, nil // Fichier non trouvé
+        }
+        return nil, fmt.Errorf("erreur récupération contenu fichier: %w", err)
+    }
+    
+    return &contenu, nil
 }

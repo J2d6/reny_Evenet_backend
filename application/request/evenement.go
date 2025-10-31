@@ -36,3 +36,5 @@ type FichierRequest struct {
     TypeFichier   string `json:"type_fichier"`
     DonneesBase64 string `json:"donnees_base64"`
 }
+
+

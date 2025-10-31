@@ -11,3 +11,13 @@ type ErreurValidation struct {
 func (e *ErreurValidation) Error() string {
     return fmt.Sprintf("Erreur validation %s: %s", e.Champ, e.Message)
 }
+
+
+
+type ErreurAuthentification struct {
+	Message string
+}
+
+func (e *ErreurAuthentification) Error() string {
+	return e.Message
+}

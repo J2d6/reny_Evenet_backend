@@ -379,3 +379,19 @@ EXCEPTION
 END;
 $$ LANGUAGE plpgsql;
 
+
+-- INSERT_INITIAL
+
+INSERT INTO type_evenement (nom, description) VALUES
+('Concert', 'Événement musical avec artistes sur scène'),
+('Conference', 'Événement de présentation et d''échanges'),
+('Spectacle', 'Représentation théâtrale ou artistique'),
+('Foire', 'Compétition ou événement sportif'),
+('Seminaire', 'Seminaire'),
+('Exposition', 'Présentation d''œuvres ou de produits');
+
+INSERT INTO type_place (nom, description, avantages) VALUES
+('VIP', 'Place premium avec avantages exclusifs', 'Accès lounge, parking dédié, restauration incluse'),
+('Standard', 'Place classique standard', 'Accès à l''événement, siège standard'),
+('Économique', 'Place à prix réduit', 'Accès basique à l''événement'),
+('Premium', 'Premium');

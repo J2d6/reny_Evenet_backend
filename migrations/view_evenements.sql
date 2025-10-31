@@ -1,6 +1,3 @@
--- ================================================
--- VUE : Détails complets d'un événement avec URLs fichiers
--- ================================================
 CREATE OR REPLACE VIEW vue_evenement_complet AS
 SELECT 
     e.id as evenement_id,
@@ -56,7 +53,7 @@ SELECT
         WHERE t_inner.evenement_id = e.id
     ) as tarifs,
     
-    -- Fichiers avec URLs de contenu (agrégation JSON)
+    -- Fichiers avec URLs de contenu (agrégation JSON) - DATES FORMATÉES EN ISO
     COALESCE(
         (
             SELECT json_agg(
@@ -66,7 +63,7 @@ SELECT
                     'type_mime', fe.type_mime,
                     'type_fichier', fe.type_fichier,
                     'taille_bytes', fe.taille_bytes,
-                    'date_upload', fe.date_upload,
+                    'date_upload', to_char(fe.date_upload, 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'), -- FORMAT ISO
                     'url_contenu', '/v1/evenements/' || e.id || '/fichiers/' || fe.id || '/contenu'
                 )
                 ORDER BY fe.date_upload DESC

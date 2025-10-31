@@ -17,8 +17,12 @@ import (
 
 
 func TestCreateNewEvenementAvecVraisFichiers(t *testing.T) {
+	conn, err := db.CreateNewPgxConnexion() ; 
+	if err != nil {
+		t.Fatalf("Faild to connect to the database : %v", err)
+	}
 
-	ev_repo := reposiory.NewEvenementRepository(db.CreateNewPgxConnexion())
+	ev_repo := reposiory.NewEvenementRepository(conn)
 	
 	// Chargement des fichiers réels
 	fichiers, err := chargerFichiersDeTest(t)
