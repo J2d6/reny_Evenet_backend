@@ -10,6 +10,7 @@ import (
 	"github.com/J2d6/reny_event/infrastructure/repository"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/cors"
 )
 
 func main() {
@@ -38,6 +39,16 @@ func main() {
 	// Configuration du router
 	r := chi.NewRouter()
 
+	// Middleware CORS CONFIGURÉ POUR SERVEO
+	r.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"https://*.serveo.net", "http://localhost:*", "https://localhost:*", "*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token", "X-Requested-With"},
+		ExposedHeaders:   []string{"Link", "Content-Disposition"},
+		AllowCredentials: true,
+		MaxAge:           300,
+	}))
+
 	// Middlewares globaux
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
@@ -46,9 +57,17 @@ func main() {
 	// Setup des routes avec authentification
 	application.SetupRoutes(r, evenementService, authService, jwtSecret)
 
+	// Route health check pour tester
+	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"status": "OK", "message": "API is running with CORS enabled"}`))
+	})
+
 	// Démarrage serveur
 	port := ":3000"
 	log.Printf("🚀 Serveur démarré sur http://localhost%s", port)
+	log.Printf("🌍 CORS configuré pour : *.serveo.net, localhost, et toutes les origines")
 	log.Printf("")
 	log.Printf("🔐 Endpoints d'authentification:")
 	log.Printf("   POST http://localhost%s/v1/auth/connexion", port)
@@ -58,6 +77,9 @@ func main() {
 	log.Printf("   POST http://localhost%s/v1/evenements (🔒 PROTÉGÉ - JWT requis)", port)
 	log.Printf("   GET  http://localhost%s/v1/evenements/{id} (🔓 PUBLIC)", port)
 	log.Printf("   GET  http://localhost%s/v1/evenements/{id}/fichiers/{id}/contenu (🔓 PUBLIC)", port)
+	log.Printf("")
+	log.Printf("❤️  Health Check:")
+	log.Printf("   GET  http://localhost%s/health", port)
 
 	if err := http.ListenAndServe(port, r); err != nil {
 		log.Fatalf("❌ Erreur serveur: %v", err)
