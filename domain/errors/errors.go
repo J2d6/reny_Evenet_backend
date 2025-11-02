@@ -21,3 +21,12 @@ type ErreurAuthentification struct {
 func (e *ErreurAuthentification) Error() string {
 	return e.Message
 }
+
+
+type ErreurSQL struct {
+    Message string
+}
+
+func (e *ErreurSQL) Error() string {
+    return e.Message
+}

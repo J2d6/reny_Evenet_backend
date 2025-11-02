@@ -21,4 +21,6 @@ var (
     FROM vue_evenement_complet 
     WHERE evenement_id = $1
 `
+
+    GET_EVENEMENT_BY_ID string = `SELECT obtenir_evenement_par_id($1) as evenement_data`
 )
