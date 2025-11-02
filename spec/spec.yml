@@ -138,6 +138,43 @@ paths:
         '500':
           description: Erreur interne du serveur
 
+  /evenements/{id}:
+    get:
+      summary: Récupérer un événement complet par son ID
+      description: >
+        Retourne toutes les données d'un événement spécifique (lieu, tarifs, places, fichiers, statistiques)
+        sans les informations de réservation.
+      tags:
+        - Événements
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID UUID de l'événement
+          schema:
+            type: string
+            format: uuid
+            example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      responses:
+        '200':
+          description: Événement trouvé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvenementComplet'
+        '400':
+          description: ID invalide ou événement non trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erreur interne du serveur
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   # ... (les autres endpoints restent inchangés)
 
 components:
@@ -289,4 +326,274 @@ components:
           description: "Données binaires encodées en base64"
           example: "/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
 
-    # ... (les autres schemas pour les réponses restent inchangés)
+    # Nouveaux schémas pour la réponse détaillée d'un événement
+    EvenementComplet:
+      type: object
+      properties:
+        evenement_id:
+          type: string
+          format: uuid
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        titre:
+          type: string
+          example: "Concert de Jazz International"
+        description_evenement:
+          type: string
+          nullable: true
+          example: "Un concert exceptionnel avec les plus grands noms du jazz contemporain"
+        date_debut:
+          type: string
+          format: date-time
+          example: "2024-07-15T20:00:00Z"
+        date_fin:
+          type: string
+          format: date-time
+          example: "2024-07-15T23:30:00Z"
+        type_evenement:
+          $ref: '#/components/schemas/TypeEvenement'
+        lieu:
+          $ref: '#/components/schemas/Lieu'
+        tarifs_et_places:
+          type: array
+          items:
+            $ref: '#/components/schemas/TarifAvecPlaces'
+        statistiques_globales:
+          $ref: '#/components/schemas/StatistiquesGlobales'
+        fichiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/FichierMetadata'
+        informations_complementaires:
+          $ref: '#/components/schemas/InformationsComplementaires'
+
+    TypeEvenement:
+      type: object
+      properties:
+        type_evenement_id:
+          type: string
+          format: uuid
+          example: "b2c3d4e5-f6g7-8901-bcde-f23456789012"
+        type_evenement_nom:
+          type: string
+          example: "Concert"
+        type_evenement_description:
+          type: string
+          nullable: true
+          example: "Événement musical avec artistes sur scène"
+
+    Lieu:
+      type: object
+      properties:
+        lieu_id:
+          type: string
+          format: uuid
+          example: "c3d4e5f6-g7h8-9012-cdef-345678901234"
+        lieu_nom:
+          type: string
+          example: "Grande Salle Symphonique"
+        lieu_adresse:
+          type: string
+          example: "123 Avenue des Arts"
+        lieu_ville:
+          type: string
+          example: "Paris"
+        lieu_capacite:
+          type: integer
+          nullable: true
+          minimum: 0
+          example: 1500
+
+    TarifAvecPlaces:
+      type: object
+      properties:
+        tarif_id:
+          type: string
+          format: uuid
+          example: "d4e5f6g7-h8i9-0123-defg-456789012345"
+        type_place_id:
+          type: string
+          format: uuid
+          example: "e5f6g7h8-i9j0-1234-efgh-567890123456"
+        type_place_nom:
+          type: string
+          example: "VIP"
+        type_place_description:
+          type: string
+          nullable: true
+          example: "Place premium avec avantages exclusifs"
+        type_place_avantages:
+          type: string
+          nullable: true
+          example: "Accès lounge, parking dédié, restauration incluse"
+        prix:
+          type: number
+          format: float
+          minimum: 0
+          example: 150.00
+        nombre_places_total:
+          type: integer
+          minimum: 0
+          example: 50
+        statistiques_etat:
+          $ref: '#/components/schemas/StatistiquesEtat'
+        places:
+          type: array
+          items:
+            $ref: '#/components/schemas/Place'
+
+    Place:
+      type: object
+      properties:
+        place_id:
+          type: string
+          format: uuid
+          example: "f6g7h8i9-j0k1-2345-fghi-678901234567"
+        numero_place:
+          type: string
+          example: "VIP-A1B2C3D4-001"
+        etat:
+          $ref: '#/components/schemas/Etat'
+
+    Etat:
+      type: object
+      properties:
+        etat_code:
+          type: string
+          example: "disponible"
+        etat_description:
+          type: string
+          example: "Place disponible à la vente"
+
+    StatistiquesEtat:
+      type: object
+      properties:
+        places_disponibles:
+          type: integer
+          minimum: 0
+          example: 45
+        places_vendues:
+          type: integer
+          minimum: 0
+          example: 5
+        places_reservees:
+          type: integer
+          minimum: 0
+          example: 0
+        places_annulees:
+          type: integer
+          minimum: 0
+          example: 0
+        places_maintenance:
+          type: integer
+          minimum: 0
+          example: 0
+
+    StatistiquesGlobales:
+      type: object
+      properties:
+        total_places:
+          type: integer
+          minimum: 0
+          example: 350
+        places_disponibles:
+          type: integer
+          minimum: 0
+          example: 320
+        places_vendues:
+          type: integer
+          minimum: 0
+          example: 25
+        places_reservees:
+          type: integer
+          minimum: 0
+          example: 5
+        places_annulees:
+          type: integer
+          minimum: 0
+          example: 0
+        places_maintenance:
+          type: integer
+          minimum: 0
+          example: 0
+        taux_occupation:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 7.14
+        capacite_restante:
+          type: integer
+          nullable: true
+          minimum: 0
+          example: 320
+        pourcentage_remplissage:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 8.57
+
+    FichierMetadata:
+      type: object
+      properties:
+        fichier_id:
+          type: string
+          format: uuid
+          example: "n4o5p6q7-r8s9-0123-nopq-456789012345"
+        nom_fichier:
+          type: string
+          example: "affiche-concert-jazz.jpg"
+        type_mime:
+          type: string
+          example: "image/jpeg"
+        taille_bytes:
+          type: integer
+          minimum: 1
+          example: 2048576
+        type_fichier:
+          type: string
+          enum: [photo, affiche, document]
+          example: "affiche"
+        date_upload:
+          type: string
+          format: date-time
+          example: "2024-06-01T10:30:00Z"
+
+    InformationsComplementaires:
+      type: object
+      properties:
+        duree_evenement_minutes:
+          type: integer
+          minimum: 0
+          example: 210
+        jours_restants:
+          type: integer
+          minimum: 0
+          example: 44
+        est_passe:
+          type: boolean
+          example: false
+        est_actuel:
+          type: boolean
+          example: false
+        est_futur:
+          type: boolean
+          example: true
+        prix_minimum:
+          type: number
+          format: float
+          minimum: 0
+          example: 35.00
+        prix_maximum:
+          type: number
+          format: float
+          minimum: 0
+          example: 150.00
+        nombre_types_places:
+          type: integer
+          minimum: 0
+          example: 3
+        statut:
+          type: string
+          enum: [termine, en_cours, a_venir]
+          example: "a_venir"
