@@ -2,29 +2,29 @@
 package application
 
 import (
-	"github.com/J2d6/reny_event/domain/service"
+	"github.com/J2d6/reny_event/application/handler"
+	"github.com/J2d6/reny_event/domain/interfaces"
 	"github.com/go-chi/chi/v5"
 )
 
-func SetupRoutes(r chi.Router, evenementService *service.EvenementService, authService *service.AuthentificationService, jwtSecret string) {
-	evenementHandler := NewEvenementHandler(evenementService)
-	authHandler := NewAuthHandler(authService, jwtSecret)
+// SetupRoutes configure toutes les routes de l'application
+func SetupRoutes(r chi.Router, evenementService interfaces.EvenementService) {
+	
+	// // Créer le handler
+	// evenementHandler := NewEvenementHandler(evenementService)
 
+	// Route pour la version v1 de l'API
 	r.Route("/v1", func(r chi.Router) {
-		// Routes publiques
-		r.Route("/auth", func(r chi.Router) {
-			r.Post("/connexion", authHandler.ConnexionHandler)
-			r.Post("/deconnexion", authHandler.DeconnexionHandler)
-		})
-
-		// Routes événements publiques (lecture seule)
-		r.Get("/evenements/{id}", evenementHandler.GetEvenementHandler)
-		r.Get("/evenements/{evenementId}/fichiers/{fichierId}/contenu", evenementHandler.GetFichierContenuHandler)
-
-		// Routes protégées (création seulement)
-		r.Route("/", func(r chi.Router) {
-			r.Use(authHandler.MiddlewareAuth) // JWT required
-			r.Post("/evenements", evenementHandler.CreateEvenementHandler)
-		})
+		// Routes événements
+		// r.Get("/evenements/{id}", evenementHandler.GetEvenementHandler)
+		// r.Get("/evenements/{evenementId}/fichiers/{fichierId}/contenu", evenementHandler.GetFichierContenuHandler)
+		r.Post("/evenements", handler.CreationEvenementHandler(evenementService)) // Route de création
 	})
+
+	// Route de santé
+	// r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+	// 	w.Header().Set("Content-Type", "application/json")
+	// 	w.WriteHeader(http.StatusOK)
+	// 	w.Write([]byte(`{"status": "ok"}`))
+	// })
 }

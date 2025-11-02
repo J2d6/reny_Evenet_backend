@@ -80,7 +80,7 @@ CREATE TABLE tarif (
 -- ================================================
 CREATE TABLE place (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    numero VARCHAR(50) NOT NULL,
+    numero VARCHAR(100) NOT NULL,
     etat_code VARCHAR(20) NOT NULL DEFAULT 'disponible',
     tarif_id UUID NOT NULL,
     CONSTRAINT fk_place_tarif
@@ -483,7 +483,7 @@ BEGIN
     
     -- ÉTAPE 6: Création des fichiers (optionnel)
     IF p_fichiers IS NOT NULL AND jsonb_array_length(p_fichiers) > 0 THEN
-        PERFORM creer_fichiers(nouvel_evenement_id, p_fichiers);
+        PERFORM creer_fichiers_bytea(nouvel_evenement_id, p_fichiers);
     END IF;
     
     RETURN nouvel_evenement_id;
@@ -642,3 +642,45 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
+-- APRES MODIF /
+
+ALTER TABLE place DROP CONSTRAINT IF EXISTS uq_place_numero_tarif;
+
+
+CREATE OR REPLACE FUNCTION creer_fichiers_bytea(
+    p_evenement_id UUID,
+    p_fichiers JSONB
+) RETURNS VOID AS $$
+DECLARE
+    fichier_record JSONB;
+    donnees_binaires BYTEA;
+    taille_calculee BIGINT;
+BEGIN
+    FOR fichier_record IN SELECT * FROM jsonb_array_elements(p_fichiers) 
+    LOOP
+        -- ✅ Conversion directe depuis le JSON (supposant que c'est déjà en hex/bytea)
+        -- Si vos données sont encodées d'une manière spécifique dans le JSON
+        donnees_binaires := decode(fichier_record->>'donnees_bytea', 'hex');
+        
+        -- Calcul de la taille
+        taille_calculee := octet_length(donnees_binaires);
+        
+        IF taille_calculee = 0 OR taille_calculee IS NULL THEN
+            RAISE EXCEPTION 'Le fichier % est vide ou invalide', fichier_record->>'nom_fichier';
+        END IF;
+        
+        INSERT INTO fichier_evenement (
+            evenement_id, nom_fichier, type_mime, taille_bytes, type_fichier, donnees_binaire
+        )
+        VALUES (
+            p_evenement_id,
+            fichier_record->>'nom_fichier',
+            fichier_record->>'type_mime',
+            taille_calculee,
+            fichier_record->>'type_fichier',
+            donnees_binaires
+        );
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
