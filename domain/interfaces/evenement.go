@@ -40,6 +40,7 @@ var TypePlaceIDMap = map[string]string{
 
 type EvenementService interface {
 	CreateNewEvenement(req *http.Request) (*models.CreationEvenementResponse, error)
+	GetEvenementByID(id_evenement uuid.UUID) (*models.EvenementComplet, error)
 }
 
 

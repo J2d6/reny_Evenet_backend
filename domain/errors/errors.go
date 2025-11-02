@@ -30,3 +30,10 @@ type ErreurSQL struct {
 func (e *ErreurSQL) Error() string {
     return e.Message
 }
+
+type ServiceError struct {
+    Message string
+}
+func (e ServiceError) Error() string {
+    return e.Message
+}

@@ -7,7 +7,7 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-// SetupRoutes configure toutes les routes de l'application
+
 func SetupRoutes(r chi.Router, evenementService interfaces.EvenementService) {
 	
 	// // Créer le handler
@@ -17,8 +17,8 @@ func SetupRoutes(r chi.Router, evenementService interfaces.EvenementService) {
 	r.Route("/v1", func(r chi.Router) {
 		// Routes événements
 		// r.Get("/evenements/{id}", evenementHandler.GetEvenementHandler)
-		// r.Get("/evenements/{evenementId}/fichiers/{fichierId}/contenu", evenementHandler.GetFichierContenuHandler)
-		r.Post("/evenements", handler.CreationEvenementHandler(evenementService)) // Route de création
+		r.Get("/evenements/{id}", handler.GetEvenementByIDHandler(evenementService))
+		r.Post("/evenements", handler.CreationEvenementHandler(evenementService)) 
 	})
 
 	// Route de santé

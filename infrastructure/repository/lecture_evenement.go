@@ -20,11 +20,6 @@ func (repo EvenementRepository) GetEvenementByID(id uuid.UUID) ([]byte, error) {
 		return nil, errors.New(err.Error())
 	}
 
-	// var evenement models.EvenementComplet
-	// if err := json.Unmarshal(jsonData, &evenement); err != nil {
-	// 	return nil, fmt.Errorf("erreur de décodage JSON: %w", err)
-	// }
-
 	
 	return  EvenementCompletJSON, nil
 }
