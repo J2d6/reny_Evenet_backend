@@ -3,7 +3,7 @@ package models
 import (
 	"fmt"
 	"time"
-
+    "github.com/shopspring/decimal"
 	"github.com/google/uuid"
 )
 
@@ -130,3 +130,64 @@ type FichierCree struct {
     TailleBytes int      `json:"taille_bytes"`
 }
 
+
+
+
+//========================================
+
+
+type EvenementStructure struct {
+    Evenement      EvenementJSON     `json:"evenement"`
+    Lieu           LieuJSON          `json:"lieu"`
+    TypeEvenement  TypeEvenementJSON `json:"type_evenement"`
+    PlacesParType  map[uuid.UUID]TypePlaceDetail `json:"places_par_type"`
+}
+
+type EvenementJSON struct {
+    ID          uuid.UUID `json:"id"`
+    Titre       string    `json:"titre"`
+    Description string    `json:"description"`
+    DateDebut   time.Time `json:"date_debut"`
+    DateFin     time.Time `json:"date_fin"`
+    TypeID      uuid.UUID `json:"type_id"`
+}
+
+type LieuJSON struct {
+    ID       uuid.UUID `json:"id"`
+    Nom      string    `json:"nom"`
+    Adresse  string    `json:"adresse"`
+    Ville    string    `json:"ville"`
+    Capacite *int      `json:"capacite"`
+}
+
+type TypeEvenementJSON struct {
+    ID          uuid.UUID `json:"id"`
+    Nom         string    `json:"nom"`
+    Description string    `json:"description"`
+}
+
+type TypePlaceDetail struct {
+    TypePlace TypePlaceJSON `json:"type_place"`
+    Tarif     TarifJSON     `json:"tarif"`
+    Places    []PlaceJSON   `json:"places"`
+}
+
+type TypePlaceJSON struct {
+    ID          uuid.UUID `json:"id"`
+    Nom         string    `json:"nom"`
+    Description string    `json:"description"`
+    Avantages   string    `json:"avantages"`
+}
+
+type TarifJSON struct {
+    ID            uuid.UUID       `json:"id"`
+    Prix          decimal.Decimal `json:"prix"`
+    NombrePlaces  int             `json:"nombre_places"`
+}
+
+type PlaceJSON struct {
+    ID               uuid.UUID `json:"id"`
+    Numero           string    `json:"numero"`
+    EtatCode         string    `json:"etat_code"`
+    EtatDescription  string    `json:"etat_description"`
+}

@@ -3,17 +3,10 @@ package repository
 import (
 	"context"
 	"encoding/json"
-
-	"github.com/J2d6/reny_event/domain/interfaces"
 	"github.com/J2d6/reny_event/domain/models"
 	"github.com/google/uuid"
-	"github.com/jackc/pgx/v5"
 )
 
-
-type EvenementRepository struct {
-	conn *pgx.Conn
-}
 
 
 
@@ -53,6 +46,3 @@ func (repo EvenementRepository) CreateNewEvenement(creationEvenementRequest mode
 
 
 
-func NewEvenementRepository(conn *pgx.Conn)  interfaces.EvenementRepository {
-	return EvenementRepository{conn: conn}
-}

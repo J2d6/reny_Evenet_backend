@@ -1,0 +1,1393 @@
+{
+    "lieu": {
+        "lieu_id": "a03f234c-b27f-4c32-9d8b-d2666aef292d",
+        "lieu_nom": "Parc Central",
+        "lieu_ville": "Paris",
+        "lieu_adresse": "Avenue des Champs-Élysées",
+        "lieu_capacite": 2000
+    },
+    "titre": "Concert en Plein Air - Jazz sous les Étoiles",
+    "date_fin": "2026-08-10T22:00:00",
+    "fichiers": [
+        {
+            "type_mime": "image/jpeg",
+            "fichier_id": "d1a54cf0-51e7-4bbf-916a-0b6b814726b6",
+            "date_upload": "2025-11-01T13:37:15.866005",
+            "nom_fichier": "image.jpg",
+            "taille_bytes": 1859616,
+            "type_fichier": "photo"
+        }
+    ],
+    "date_debut": "2026-08-10T19:00:00",
+    "evenement_id": "fc142deb-73c7-4dbb-8f51-fe05a8231836",
+    "type_evenement": {
+        "type_evenement_id": "a30b8d7c-8b25-4a91-9e59-0d6f443f4d1b",
+        "type_evenement_nom": "Concert",
+        "type_evenement_description": "Événement musical avec artistes sur scène"
+    },
+    "tarifs_et_places": [
+        {
+            "prix": 25.00,
+            "places": [
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "1d40e86e-5b95-4fe3-b2e2-5be93059303d",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-001"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8f79e2d3-1f47-4294-88ed-ce9fd0024982",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-002"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "30bc744e-933e-44b3-966a-92f6b6be86b2",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-003"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "e9cd8ea0-408c-4efe-ac9e-2b06c64287db",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-004"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "d7722338-f662-4572-bd46-69f339570cbe",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-005"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9325ee68-8fb3-4411-8cde-bccafcdba9f2",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-006"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "48721bf5-a5d9-4410-ada9-7938d196ea6a",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-007"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "bde410d0-ce3f-440d-aa67-8c1134a0fa58",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-008"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "d3592613-9dde-4335-8a04-232989ca29d0",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-009"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "df9925eb-01ce-4998-962b-4adb675764e7",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-010"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "d417d6a4-3b37-40e0-ac42-2a35b8c1e1c8",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-011"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "b6b764d3-d6cf-4e25-adec-cb6a7a8e16e0",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-012"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "45d69ea6-9d15-4924-a39e-3e60951afa23",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-013"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "34beadf8-f6b5-4535-b82b-dbb347bd477b",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-014"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "228a4630-78c3-40ef-9579-7ee58c5e108e",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-015"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "7a79e4ef-9e84-4726-b2bd-b838ed5147c6",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-016"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "76ee9cd1-ea5a-45dc-8011-82e766135e4c",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-017"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9b918b4d-41e1-4fce-804b-e6ce6f1bd669",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-018"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "3172d6a4-ceff-4b83-924c-528808e1950f",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-019"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "c34a1dbe-e669-4d9e-a30c-6c52e37e4776",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-020"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8c077d3c-2dba-432a-9565-f87ae3da7789",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-021"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "dc918a59-288d-4383-beb2-ca9dc2512b30",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-022"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "a71bed9d-f4c2-4c1c-b796-c7c3d706c83b",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-023"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9dc62982-ed4d-49b2-b160-2ef7dc458ec5",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-024"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "2719ef67-3e9e-4cf8-be69-f1e138210596",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-025"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "5c02dfda-8ba0-4000-81a5-3a59801b08d5",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-026"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "c9cf73b7-4afa-46c6-99c5-24accec62e47",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-027"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "28be3580-33d5-4ba3-b9fb-857c34e8ede1",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-028"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "2d09a0a0-5ebf-4db0-8c19-aef29130a1c1",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-029"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "2812ceed-7df7-45ef-bc6f-ae0bb456aa62",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-030"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9c227f92-01b0-41f4-ac02-324412a5c629",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-031"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "cd1eb602-8b9e-4a7b-b3f3-8a61618c2f15",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-032"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "70113b3e-48a8-448a-be25-f29888cf42e3",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-033"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "85b4f75f-7a75-4a63-8593-e65ef05720a6",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-034"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8405d3b4-5a0b-4b7e-861a-18c73679ff17",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-035"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "3cfba95f-ce0d-4692-bf0a-564ed1d492b0",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-036"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "964c2899-8668-4f81-bd78-24a0fa583e28",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-037"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "3356b97a-7668-4d82-b20e-149bd8b9c028",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-038"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "23261af1-9b58-4a27-afe1-74a5105c9975",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-039"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "ef28cda9-cdab-40b0-b1c2-bf4b018861fa",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-040"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "22b16d10-9c0c-4104-9e1a-68a677a0a7b1",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-041"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "0c0989bb-963c-4d78-812b-66d59adf80cb",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-042"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "205db229-b43f-4f79-80b1-fadd22af3949",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-043"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "b50e58f1-97f6-475d-846a-9d4f0ab336df",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-044"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "39a30617-d0f4-4e6a-b2c7-1c0377236340",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-045"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "ecc975e8-26d5-4254-8a04-0b818a2f7859",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-046"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "fdd89c3a-9559-4d60-8b37-b99159627e80",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-047"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "14233a2a-9f8a-48aa-94c6-dd80fce30b4f",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-048"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "1f124b53-f1b0-4c0b-955a-dfac80d9b689",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-049"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "fc2e957b-871d-4c6c-b62d-0d57f408634d",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-050"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "184b19ce-66de-4107-a08a-cae160b34635",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-051"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "1d2a2804-b720-4652-ba3e-9aebd8b478cd",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-052"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "427cf3ac-7f06-4979-b85b-b62f1ebe01dd",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-053"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9dc90605-3649-438f-a229-1f63016143b9",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-054"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "952066a7-8d6b-4ca0-8132-264f871a037b",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-055"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "5d335f36-31fb-4f73-90fc-d64b16f117f8",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-056"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8d6b7a6b-8873-44a3-bc54-d41bb9c7d766",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-057"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "31e01ce5-e6e9-436d-ac60-54ce402bb336",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-058"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "cc0c823e-5b6b-485b-9e01-5ad9a158e3a6",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-059"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "2210a164-8b07-4805-9dc6-ea294341b359",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-060"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "264192a6-c280-4bf1-861e-3529e495a9b7",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-061"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8c551db8-aa15-41f2-80f2-b904e6b7e09d",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-062"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "acb6bc60-84d9-46c8-bb15-595f7947492f",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-063"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "e3330a16-f8b9-4ec1-bd7f-0275d451e2d0",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-064"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "af69c5c6-d968-47db-8ef7-2905487b6b3c",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-065"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "13d38fa0-10be-4489-a5df-d7c3dbf9a424",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-066"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "251709b3-019c-4e64-902a-9e08fc842f16",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-067"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "6ffe5a11-c3f9-464e-becc-9f007fa69433",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-068"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "e5843a03-7f11-42d2-a2f5-a3bc60dabc8b",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-069"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "17116885-dd06-4f86-8cbb-cea234de049e",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-070"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "64febcc3-ffb3-400c-9488-a9f8a15916c1",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-071"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "562ed190-bfa7-48f4-9752-7304e7b00976",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-072"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "568b4b07-12a9-4fdb-9ed7-93463cc2f869",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-073"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "bcbc29c8-3091-46fd-a419-6c37d580ba02",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-074"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "bf0ea7d6-b9c9-4a05-92e6-a6f266b78595",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-075"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8343c5ed-a5d5-4fff-af9a-ffdd5bf23a33",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-076"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "80647058-c0b7-4a70-aff3-dae797f2b03d",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-077"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "aac97c9f-6e5c-4bcb-9df7-07f7619497e1",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-078"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "5cdddc0b-3a39-4491-a395-7fefd3c5fdb3",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-079"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "ae9472e4-16d7-4852-9f64-4e71e35145a4",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-080"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "cd515cb5-9f63-46e7-886d-04e272e3588c",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-081"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "fcfa37ca-23d2-4629-8d12-61f4b276f7e0",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-082"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8f92aa74-18fd-4579-a69f-edf69edca7dd",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-083"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "a634b17e-a478-40c4-82c8-2d2672d1007f",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-084"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "086c2c73-7b26-45d7-bab3-cbff4b92a875",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-085"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "3679b1f4-6813-499a-8657-87b054696d48",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-086"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "17629e6e-4c86-46e0-af65-1a9f201c27e9",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-087"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "c299a885-f785-4522-ac21-b2e504239688",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-088"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "d4dabe18-7926-472b-9c6f-4ea9b8b61edd",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-089"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "661a91cf-7216-4d76-a965-9eff2af8ec42",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-090"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9caac8c1-d057-4d88-8ec8-d3ec7c89a5c2",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-091"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "7264f8cb-34dc-4e79-8c2c-0c15f3f98f22",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-092"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "851e8257-5fa4-4ded-8646-89e320192d49",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-093"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "c06164fb-8265-46f6-bb44-ef253df61aae",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-094"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "03ae67df-b1e8-4584-b5fc-2ebdec4314e3",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-095"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "35953e61-4829-47b0-a413-41681f56c14c",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-096"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "4b75ed36-f2d4-41d1-963b-acc324e93a3a",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-097"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "04bbc0cf-d85e-4f54-9b57-45d2712916e0",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-098"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "71733ce1-d14c-497b-9bc4-e365fcb16fcc",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-099"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "aa92e79f-12c7-4648-a986-c033695d1463",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-100"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9b215c6c-d946-482f-b5b1-a90485047202",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-100"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8706c167-8384-42b5-80ad-88643feefe57",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-101"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "aa834898-9e48-4987-8962-83d517d3d9d8",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-102"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "c7a1a39c-6d74-4e37-9ca8-509c7157a373",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-103"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "db1db704-fa6e-4380-967a-7e88f33a3f8c",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-104"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "0a60584d-939d-4b85-812f-0bad7e642e93",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-105"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "6e9398ca-5f37-4a1b-b8fc-14ab6647f2d2",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-106"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "1e1e882c-f895-410e-aa69-a14f0104ba06",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-107"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9c3df35a-1654-44c6-885b-3b5ce3c35bd1",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-108"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9313ad54-51d9-43c9-abd3-6e31b634458d",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-109"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "4c790efb-5f59-4a80-8bc5-51422fc7b810",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-110"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "0feff7a7-bb48-4a03-8649-a60d25bf6714",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-111"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "18ed9d9e-9f0e-4702-807e-f3dfaf7bd91c",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-112"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "853f6634-56e3-4a25-acbd-e3d2e9efc84b",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-113"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8d9dd09b-5d9d-4260-b978-45be0a001798",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-114"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "63c2aa7b-28a5-46ad-ba9a-850d2fe81a3b",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-115"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9ea85779-06bc-4606-bbc7-d469251fd54f",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-116"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "6cda730e-3126-4613-b1f1-cd988d74f6d8",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-117"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "bc809d23-e7b9-4b23-857b-eda3b664fb75",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-118"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "013fe977-c942-44dc-964e-d8dede295063",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-119"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "231e9bbf-e5a7-4417-ba17-91f937f15a25",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-120"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "687aa37d-eee7-471d-811e-d57aa4ae63c4",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-121"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "a8f29f6d-92f4-4541-99d9-20293359b6c7",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-122"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "a3f639bf-1f5c-472f-9520-b6cca66ef7bd",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-123"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "e2e6b228-9107-4654-93c3-92f1ab508c3c",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-124"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "bf6ca485-6b20-4c43-8610-417488dce978",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-125"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "611b2e4b-96c6-4d97-bac6-896b89ddc7d6",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-126"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "1cedd696-dce2-435f-be12-1b83f4a91485",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-127"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "6557bd0e-8997-4a50-8e1d-3aaf2efe961d",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-128"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "be9c4c6e-775e-45cc-96c8-c03b76200ad2",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-129"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "6c3d1bc4-4f6a-4503-b229-c9331cfb8417",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-130"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "fffa2c84-a448-4482-9a0e-0119906c5ed2",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-131"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "c954fcea-943e-416c-8d42-961e2ece8dbf",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-132"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "4c6b45c2-509f-4c49-853e-e663acce9e68",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-133"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "f50ec486-2e66-4930-9aa7-a9dbb6a8c53f",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-134"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "df56402c-03e9-4016-a0d5-6221132b7a40",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-135"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "3c3a9219-f304-46c9-9d72-648842f2b666",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-136"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9a11fb33-fea9-4043-927c-332d07649383",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-137"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "c0626948-e598-43b5-9ecb-c2a76a7d0fc3",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-138"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "68fca76b-82ae-47cb-a8c8-f122f39ca310",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-139"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9453c5fc-bf93-4a74-9109-e853922f266c",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-140"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "1b460b88-4476-46f8-bd31-668594cf3a1a",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-141"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "99231c45-bb98-4b45-9db8-a853d4b9cfc9",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-142"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "80a283d7-d4bb-4937-adad-372bea5b6087",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-143"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "a31bab39-1e83-42de-ac5e-21180756b745",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-144"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "1a198c81-0e20-43e5-bc4b-b801db865d8d",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-145"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "29cf83db-80b6-4948-b79a-49473c6cdf68",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-146"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "a2324330-efb2-4b99-b006-ed962ebacab0",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-147"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "c652d3ea-a130-4c13-b8c7-9467924d7dce",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-148"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "3cb30651-e56c-4889-99d5-d046fee39164",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-149"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "9832e468-3ad2-44c2-86fe-b8cb09630271",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-150"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "c346d90a-08ea-4159-befe-61c36c7ba095",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-151"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "a3eb8fb5-2656-482c-a17e-727f86a23e60",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-152"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "f5514085-a602-4fa8-b37c-ec2b0147ebda",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-153"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "2813c79e-ae48-4cc4-865b-0c0b0c1ce6f5",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-154"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "75dfa594-9dce-45e2-bdea-1b3db83e1692",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-155"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "8ed95d04-a14a-4df5-b57a-a25326c2d2bc",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-156"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "421da6ed-7854-4ea4-ac4f-3192f2b12c82",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-157"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "bc1066a7-371b-4597-8bc3-e0913d8bc608",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-158"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "4d617eaf-5e80-47cd-9241-a1dbda10ab51",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-159"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "55a139c1-efe4-4df0-9606-51968c62ca59",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-160"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "aa4ff27e-6531-4b3d-bac6-0d76cb562b65",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-161"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "d074163c-210c-4df0-bb80-4c1b90f4b8c8",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-162"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "dc216baf-5e08-40e1-984c-04cc459dd474",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-163"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "7d9374cc-396f-4778-995b-332233aaab88",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-164"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "db01c875-c32a-4b6a-9703-4974a7e6f5c4",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-165"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "848d476c-1425-42a6-8381-bd42ba2b6eb9",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-166"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "1245f418-155c-4cc3-9d10-5938fdc455b4",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-167"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "80aebc39-2a8a-4b61-887b-95583109c6c6",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-168"
+                },
+                {
+                    "etat": {
+                        "etat_code": "disponible",
+                        "etat_description": "Place disponible à la vente"
+                    },
+                    "place_id": "62c02c07-7ca6-4be8-b7f2-dfd595ee7dc4",
+                    "numero_place": "ÉCONOMIQUE-fc142deb-73c7-4dbb-8f51-fe05a8231836-169"
+                },
+                {
+                 

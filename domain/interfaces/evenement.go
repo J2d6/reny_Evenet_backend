@@ -45,4 +45,5 @@ type EvenementService interface {
 
 type EvenementRepository interface {
 	CreateNewEvenement(request models.CreationEvenementRequest) (uuid.UUID, error)
+	GetEvenementByID(id uuid.UUID) (*models.EvenementComplet, error)
 }
