@@ -36,5 +36,6 @@ type EvenementRepository interface {
 	CreateNewEvenement(request models.CreationEvenementRequest) (uuid.UUID, error)
 	GetEvenementByID(id uuid.UUID) ([]byte, error)
 	Reserver(models.ReservationRequest) (string, error)
+	GetAllReservationsFor(id_evenement uuid.UUID)(string, error)
 
 }

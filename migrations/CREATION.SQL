@@ -1053,3 +1053,130 @@ EXCEPTION
         RAISE;
 END;
 $$ LANGUAGE plpgsql;
+
+
+-- ================================================
+-- FONCTION : obtenir_reservations_evenement
+-- ================================================
+CREATE OR REPLACE FUNCTION obtenir_reservations_evenement(p_evenement_id UUID)
+RETURNS JSONB AS $$
+DECLARE
+    result JSONB;
+BEGIN
+    SELECT jsonb_build_object(
+        'evenement_id', p_evenement_id,
+        'evenement_titre', (SELECT titre FROM evenement WHERE id = p_evenement_id),
+        'total_reservations', COUNT(DISTINCT vre.reservation_id),
+        'reservations', COALESCE(
+            jsonb_agg(
+                jsonb_build_object(
+                    'reservation_id', vre.reservation_id,
+                    'email', vre.email,
+                    'etat_reservation', vre.etat_reservation,
+                    'nombre_places_reservees', vre.nombre_places_reservees,
+                    'total_reservation', vre.total_reservation,
+                    'details_places', vre.details_places
+                )
+                ORDER BY vre.reservation_id
+            ),
+            '[]'::jsonb
+        )
+    )
+    INTO result
+    FROM vue_reservations_evenement vre
+    WHERE vre.evenement_id = p_evenement_id
+    GROUP BY vre.evenement_id, vre.evenement_titre;
+    
+
+    IF result IS NULL THEN
+        result := jsonb_build_object(
+            'evenement_id', p_evenement_id,
+            'evenement_titre', (SELECT titre FROM evenement WHERE id = p_evenement_id),
+            'total_reservations', 0,
+            'reservations', '[]'::jsonb
+        );
+    END IF;
+    
+    RETURN result;
+END;
+$$ LANGUAGE plpgsql;
+
+-- ================================================
+-- VUE : vue_reservations_evenement 
+-- ================================================
+CREATE OR REPLACE VIEW vue_reservations_evenement AS
+WITH reservations_details AS (
+    SELECT 
+        e.id AS evenement_id,
+        e.titre AS evenement_titre,
+        r.id AS reservation_id,
+        r.email,
+        r.etat AS etat_reservation,
+        p.id AS place_id,
+        p.numero AS numero_place,
+        tp.id AS type_place_id,
+        tp.nom AS type_place_nom,
+        t.prix AS tarif,
+        p.etat_code,
+        ep.description AS etat_description
+    FROM evenement e
+    JOIN tarif t ON e.id = t.evenement_id
+    JOIN place p ON t.id = p.tarif_id
+    JOIN reservation_place rp ON p.id = rp.place_id
+    JOIN reservation r ON rp.reservation_id = r.id
+    JOIN type_place tp ON t.type_place_id = tp.id
+    JOIN etat_place ep ON p.etat_code = ep.code
+)
+SELECT 
+    evenement_id,
+    evenement_titre,
+    reservation_id,
+    email,
+    etat_reservation,
+    COUNT(place_id) AS nombre_places_reservees,
+    SUM(tarif) AS total_reservation,
+    
+    -- Détails des places réservées
+    jsonb_agg(
+        jsonb_build_object(
+            'place_id', place_id,
+            'numero_place', numero_place,
+            'type_place_id', type_place_id,
+            'type_place_nom', type_place_nom,
+            'tarif', tarif,
+            'etat_place', jsonb_build_object(
+                'code', etat_code,
+                'description', etat_description
+            )
+        )
+        ORDER BY type_place_nom, numero_place
+    ) AS details_places,
+    
+    -- Résumé par type de place (sans imbrication d'agrégats)
+    (
+        SELECT jsonb_agg(
+            jsonb_build_object(
+                'type_place_id', type_place_id,
+                'type_place_nom', type_place_nom,
+                'nombre_places', nombre_places,
+                'prix_unitaire', prix_unitaire,
+                'sous_total', sous_total
+            )
+        )
+        FROM (
+            SELECT 
+                type_place_id,
+                type_place_nom,
+                COUNT(*) AS nombre_places,
+                AVG(tarif) AS prix_unitaire,
+                SUM(tarif) AS sous_total
+            FROM reservations_details rd2
+            WHERE rd2.reservation_id = rd1.reservation_id
+            GROUP BY type_place_id, type_place_nom
+        ) AS resume
+    ) AS resume_par_type
+
+FROM reservations_details rd1
+GROUP BY 
+    evenement_id, evenement_titre,
+    reservation_id, email, etat_reservation;

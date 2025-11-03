@@ -2,7 +2,9 @@ package infrastructure
 
 import (
 	"testing"
+
 	"github.com/J2d6/reny_event/domain/models"
+	"github.com/google/uuid"
 )
 
 
@@ -49,3 +51,13 @@ func TestReservation(t *testing.T) {
 }
 
 
+func TestGetReservation(t *testing.T) {
+	t.Run("Get alll reservations for a known evenement", func (t *testing.T) {
+		repo:= CreateRepository(t)
+		id_Evenement := uuid.New()
+		_, err := repo.GetAllReservationsFor(id_Evenement)
+		if err != nil {
+			t.Errorf("Didn't get resevations : %v", err)
+		}
+	})
+}
