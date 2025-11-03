@@ -33,17 +33,18 @@ func (repo EvenementRepository) Reserver(req models.ReservationRequest) (string,
     return reservationID, nil
 }
 
-func (repo EvenementRepository) GetAllReservationsFor(id_evenement uuid.UUID)  (string, error){
-    var result string
+func (repo EvenementRepository) GetAllReservationsFor(id_evenement uuid.UUID) ([]byte, error) {
+    var jsonData []byte
     err := repo.conn.QueryRow(
         context.Background(),
         "SELECT obtenir_reservations_evenement($1)",
         id_evenement,
-    ).Scan(&result)
-    
+    ).Scan(&jsonData)
     if err != nil {
-        return "", err
+        return nil, err
     }
     
-    return result,nil
+ 
+    return jsonData, nil
 }
+

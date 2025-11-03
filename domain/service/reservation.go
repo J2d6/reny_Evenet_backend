@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/J2d6/reny_event/domain/models"
+	"github.com/google/uuid"
 )
 
 
@@ -21,6 +22,15 @@ func (service EvenementService) Reserver(req *http.Request) (string, error) {
 		return "", err
 	}
 	return  reservation_id, nil
+}
+
+func (service EvenementService) GetAllReservationsFor(evenement_id uuid.UUID)([]byte, error)  {
+    reservations,err := service.repo.GetAllReservationsFor(evenement_id)
+    if err != nil {
+        return nil, err
+    }
+
+    return reservations, nil
 }
 
 

@@ -1,4 +1,4 @@
-// Dans application/routes.go
+
 package application
 
 import (
@@ -20,13 +20,12 @@ func SetupRoutes(r chi.Router, evenementService interfaces.EvenementService) {
 		MaxAge:           86400, 
 	}))
 
-	// Route pour la version v1 de l'API
+
 	r.Route("/v1", func(r chi.Router) {
-		// Routes événements
-		// r.Get("/evenements/{id}", evenementHandler.GetEvenementHandler)
 		r.Get("/evenements/{id}", handler.GetEvenementByIDHandler(evenementService))
 		r.Post("/evenements", handler.CreationEvenementHandler(evenementService)) 
 		r.Post("/reservations", handler.ReserverHandler(evenementService)) 
+		r.Get("/evenements/reservations/{id}", handler.AllReservationsHandler(evenementService)) 
 	})
 
 	// Route de santé

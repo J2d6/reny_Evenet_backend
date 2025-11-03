@@ -29,6 +29,7 @@ type EvenementService interface {
 	CreateNewEvenement(req *http.Request) (*models.CreationEvenementResponse, error)
 	GetEvenementByID(id_evenement uuid.UUID) (*models.EvenementComplet, error)
 	Reserver(req *http.Request) (string, error)
+	GetAllReservationsFor(evenement_id uuid.UUID) ([]byte, error)
 }
 
 
@@ -36,6 +37,6 @@ type EvenementRepository interface {
 	CreateNewEvenement(request models.CreationEvenementRequest) (uuid.UUID, error)
 	GetEvenementByID(id uuid.UUID) ([]byte, error)
 	Reserver(models.ReservationRequest) (string, error)
-	GetAllReservationsFor(id_evenement uuid.UUID)(string, error)
+	GetAllReservationsFor(id_evenement uuid.UUID)([]byte, error)
 
 }

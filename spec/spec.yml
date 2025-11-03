@@ -171,6 +171,43 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
+  /evenements/reservations/{id}:
+    get:
+      summary: Récupérer toutes les réservations d'un événement
+      description: >
+        Retourne la liste complète de toutes les réservations pour un événement spécifique,
+        incluant les détails des places réservées et les informations des clients.
+      tags:
+        - Réservations
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID UUID de l'événement
+          schema:
+            type: string
+            format: uuid
+            example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      responses:
+        '200':
+          description: Liste des réservations récupérée avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservationsEvenementResponse'
+        '400':
+          description: ID invalide ou événement non trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erreur interne du serveur
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /reservations:
     post:
       summary: Créer une nouvelle réservation
@@ -245,6 +282,89 @@ components:
         message:
           type: string
           example: "Message d'erreur détaillé"
+
+    # Nouveaux schémas pour les réservations d'événement
+    ReservationsEvenementResponse:
+      type: object
+      properties:
+        evenement_id:
+          type: string
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        evenement_titre:
+          type: string
+          example: "Concert Coldplay 2024"
+        total_reservations:
+          type: integer
+          minimum: 0
+          example: 2
+        reservations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReservationDetail'
+
+    ReservationDetail:
+      type: object
+      properties:
+        reservation_id:
+          type: string
+          format: uuid
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        email:
+          type: string
+          format: email
+          example: "client@example.com"
+        etat_reservation:
+          type: string
+          example: "en_attente"
+        nombre_places_reservees:
+          type: integer
+          minimum: 0
+          example: 3
+        total_reservation:
+          type: number
+          format: float
+          minimum: 0
+          example: 450000
+        details_places:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlaceDetail'
+
+    PlaceDetail:
+      type: object
+      properties:
+        place_id:
+          type: string
+          format: uuid
+          example: "f6g7h8i9-j0k1-2345-fghi-678901234567"
+        numero_place:
+          type: string
+          example: "VIP-A1B2C3D4-001"
+        type_place_id:
+          type: string
+          format: uuid
+          example: "e5f6g7h8-i9j0-1234-efgh-567890123456"
+        type_place_nom:
+          type: string
+          example: "VIP"
+        tarif:
+          type: number
+          format: float
+          minimum: 0
+          example: 150000
+        etat_place:
+          $ref: '#/components/schemas/EtatPlaceDetail'
+
+    EtatPlaceDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "reservee"
+        description:
+          type: string
+          example: "Place réservée temporairement"
 
     # Authentification
     ConnexionRequest:
