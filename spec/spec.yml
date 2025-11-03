@@ -3,7 +3,7 @@ info:
   title: API Gestion d'Événements
   version: 1.1.0
   description: >
-    API pour gérer les événements, les lieux et les types d'événements.
+    API pour gérer les événements, les lieux, les réservations et les types d'événements.
     Authentification requise pour la création d'événements.
 
 servers:
@@ -114,15 +114,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                    example: "e7b8c2f1-1234-4c1a-8b9f-12ef34567890"
-                  message:
-                    type: string
-                    example: "Événement créé avec succès"
+                $ref: '#/components/schemas/SuccessResponse'
         '400':
           description: Données invalides
           content:
@@ -137,6 +129,10 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Erreur interne du serveur
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
   /evenements/{id}:
     get:
@@ -175,7 +171,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  # ... (les autres endpoints restent inchangés)
+  /reservations:
+    post:
+      summary: Créer une nouvelle réservation
+      description: >
+        Réserve des places pour un événement. Les places sont marquées comme réservées
+        et liées à l'email du client.
+      tags:
+        - Réservations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+            example:
+              email: "client@example.com"
+              evenement_id: "123e4567-e89b-12d3-a456-426614174000"
+              places_demandees:
+                - type_place_id: "14467104-6d39-445c-a2d1-4dd1f697ac68"
+                  nombre: 2
+                - type_place_id: "b2c3d4e5-f90c-23e4-b567-537725285111"
+                  nombre: 1
+      responses:
+        '201':
+          description: Réservation créée avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Données invalides ou places insuffisantes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erreur interne du serveur
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
 components:
   securitySchemes:
@@ -185,6 +221,32 @@ components:
       name: session_token
 
   schemas:
+    # Réponses standardisées
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Opération réussie"
+        id:
+          type: string
+          format: uuid
+          example: "e7b8c2f1-1234-4c1a-8b9f-12ef34567890"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Message d'erreur détaillé"
+
+    # Authentification
     ConnexionRequest:
       type: object
       required:
@@ -215,13 +277,44 @@ components:
               type: string
               example: "admin"
 
-    ErrorResponse:
+    # Réservations
+    ReservationRequest:
       type: object
+      required:
+        - email
+        - evenement_id
+        - places_demandees
       properties:
-        error:
+        email:
           type: string
-          example: "Message d'erreur détaillé"
+          format: email
+          example: "client@example.com"
+        evenement_id:
+          type: string
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        places_demandees:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/TypePlaceDemande'
 
+    TypePlaceDemande:
+      type: object
+      required:
+        - type_place_id
+        - nombre
+      properties:
+        type_place_id:
+          type: string
+          format: uuid
+          example: "14467104-6d39-445c-a2d1-4dd1f697ac68"
+        nombre:
+          type: integer
+          minimum: 1
+          example: 2
+
+    # Événements
     EvenementCreation:
       type: object
       required:
@@ -326,7 +419,7 @@ components:
           description: "Données binaires encodées en base64"
           example: "/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
 
-    # Nouveaux schémas pour la réponse détaillée d'un événement
+    # Réponses détaillées
     EvenementComplet:
       type: object
       properties:

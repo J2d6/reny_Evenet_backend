@@ -7,19 +7,6 @@ import (
 	"github.com/google/uuid"
 )
 
-// import (
-// 	"context"
-
-// 	"github.com/J2d6/reny_event/domain/models"
-// 	"github.com/google/uuid"
-// )
-
-// type EvenementRepository interface {
-//     CreateNewEvenement(ctx context.Context, req models.CreationEvenementRequest) (uuid.UUID, error)
-//     GetEvenementByID(ctx context.Context, evenementID uuid.UUID) (*models.EvenementRow, error)
-//     GetFichierContenu(ctx context.Context, evenementID uuid.UUID, fichierID uuid.UUID) (*models.FichierContenu, error)
-//     CloseConn()
-// }
 
 var TypeEvenementIDMap = map[string]string{
     "Concert": "a30b8d7c-8b25-4a91-9e59-0d6f443f4d1b",
@@ -41,12 +28,13 @@ var TypePlaceIDMap = map[string]string{
 type EvenementService interface {
 	CreateNewEvenement(req *http.Request) (*models.CreationEvenementResponse, error)
 	GetEvenementByID(id_evenement uuid.UUID) (*models.EvenementComplet, error)
+	Reserver(req *http.Request) (string, error)
 }
 
 
 type EvenementRepository interface {
 	CreateNewEvenement(request models.CreationEvenementRequest) (uuid.UUID, error)
 	GetEvenementByID(id uuid.UUID) ([]byte, error)
-
 	Reserver(models.ReservationRequest) (string, error)
+
 }
