@@ -12,17 +12,14 @@ import (
 func (repo EvenementRepository) Reserver(req models.ReservationRequest) (string, error) {
 	
     var reservationID string
-    
-    // Convertir PlacesDemandees en JSON
     placesJSON, err := json.Marshal(req.PlacesDemandees)
     if err != nil {
         return "", fmt.Errorf("erreur marshaling JSON: %w", err)
     }
     
-    // Appeler la fonction PostgreSQL
     err = repo.conn.QueryRow(
         context.Background(),
-        "SELECT reserver_places($1, $2, $3)",
+        RESERVER_QUERY,
         req.Email,
         req.EvenementID,
         placesJSON,
