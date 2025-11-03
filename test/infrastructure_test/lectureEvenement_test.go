@@ -15,7 +15,7 @@ import (
 func TestLectureEvenement(t *testing.T) { 
 	t.Run("NOT FOUND EVENEMENT", func (t *testing.T) {
 		evenement_id := uuid.New()
-		repo := createRepository(t)
+		repo := CreateRepository(t)
 		_ , err := repo.GetEvenementByID(evenement_id)
 		if err == nil {
 			t.Errorf("Didn't get the SQL error : %v", err)
@@ -24,7 +24,7 @@ func TestLectureEvenement(t *testing.T) {
 
 	t.Run("Get evenement by known ID", func (t *testing.T) {
 		evenement_id := uuid.MustParse("fc142deb-73c7-4dbb-8f51-fe05a8231836")
-		repo:= createRepository(t)
+		repo:= CreateRepository(t)
 		_ , err := repo.GetEvenementByID(evenement_id)
 		assertError(t, err)
 	})
@@ -46,7 +46,7 @@ func assertSQLError(t testing.TB, err error)  {
 }
 
 
-func createRepository(t testing.TB) interfaces.EvenementRepository  {
+func CreateRepository(t testing.TB) interfaces.EvenementRepository  {
 	t.Helper()
 	conn, err := db.CreateNewPgxConnexion()
 	if err != nil {

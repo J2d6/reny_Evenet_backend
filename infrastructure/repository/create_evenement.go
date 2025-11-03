@@ -8,8 +8,6 @@ import (
 )
 
 
-
-
 func (repo EvenementRepository) CreateNewEvenement(creationEvenementRequest models.CreationEvenementRequest) (uuid.UUID, error)  {
 	tarifsJSON, err := json.Marshal(creationEvenementRequest.Tarifs); 
 	if err != nil {
