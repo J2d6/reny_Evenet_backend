@@ -7,7 +7,7 @@ import (
 
 
 func CreateNewPgxConnexion() (*pgx.Conn, error) {
-	conn, err := pgx.Connect(context.Background(), 	"postgresql://reny_event:vepC19IWOqDgy68Va3p6tdtDO1WW1iYV@dpg-d44qlgbipnbc73aps8i0-a/reny_event")
+	conn, err := pgx.Connect(context.Background(), 	"postgresql://postgres:gF7dYGWDK9tOUzCN@db.bbfsckuzadzzsdymgzmj.supabase.co:5432/postgres")
 	if err != nil {
 		return nil, err
 	}
