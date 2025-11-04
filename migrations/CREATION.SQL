@@ -951,6 +951,47 @@ CREATE INDEX idx_tarif_evenement_type ON tarif(evenement_id, type_place_id);
 
 
 --======================RESERVATION ==================
+
+
+
+-- public.reservation definition
+
+-- Drop table
+
+-- DROP TABLE public.reservation;
+
+CREATE TABLE public.reservation (
+	id uuid DEFAULT gen_random_uuid() NOT NULL,
+	reference_paiement varchar(100) NULL,
+	date_reservation timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	email varchar(255) NOT NULL,
+	etat_code varchar(20) DEFAULT 'en_attente'::character varying NOT NULL,
+	etat varchar(20) DEFAULT 'en_attente'::character varying NOT NULL,
+	CONSTRAINT reservation_pkey PRIMARY KEY (id)
+);
+CREATE INDEX idx_reservation_reference_paiement ON public.reservation USING btree (reference_paiement);
+
+-- public.reservation_place definition
+
+-- Drop table
+
+-- DROP TABLE public.reservation_place;
+
+CREATE TABLE public.reservation_place (
+	id uuid DEFAULT gen_random_uuid() NOT NULL,
+	reservation_id uuid NOT NULL,
+	place_id uuid NOT NULL,
+	CONSTRAINT reservation_place_pkey PRIMARY KEY (id),
+	CONSTRAINT uq_reservation_place UNIQUE (place_id)
+);
+CREATE INDEX idx_reservation_place_place ON public.reservation_place USING btree (place_id);
+CREATE INDEX idx_reservation_place_reservation ON public.reservation_place USING btree (reservation_id);
+
+
+-- public.reservation_place foreign keys
+
+ALTER TABLE public.reservation_place ADD CONSTRAINT fk_reservation_place_place FOREIGN KEY (place_id) REFERENCES public.place(id) ON DELETE CASCADE;
+ALTER TABLE public.reservation_place ADD CONSTRAINT fk_reservation_place_reservation FOREIGN KEY (reservation_id) REFERENCES public.reservation(id) ON DELETE CASCADE;
 -- Ajout de la colonne email si elle n'existe pas
 ALTER TABLE reservation ADD COLUMN IF NOT EXISTS email VARCHAR(255) NOT NULL;
 
